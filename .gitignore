@@ -1,0 +1,4 @@
+*.pyc
+bernhard.egg-info/
+dist/
+build/
