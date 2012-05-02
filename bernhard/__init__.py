@@ -5,9 +5,6 @@ import struct
 
 import pb
 
-version_info = (0, 0, 1)
-__version__ = ".".join(map(str, version_info))
-
 class TransportError(Exception):
     def __init__(self, msg):
         self.msg = msg

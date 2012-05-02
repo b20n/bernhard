@@ -5,11 +5,9 @@ import sys
 
 from setuptools import setup
 
-from bernhard import __version__
-
 setup(
     name = 'bernhard',
-    version = __version__,
+    version = '0.0.1',
 
     description = 'Python client for Riemann',
     long_description = file(
@@ -39,4 +37,5 @@ setup(
     zip_safe = False,
     packages = ['bernhard'],
     include_package_data = True,
+    install_requires=['protobuf']
 )
