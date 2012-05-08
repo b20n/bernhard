@@ -120,25 +120,27 @@ class Client(object):
         self.host = host
         self.port = port
         self.transport = transport
-        self.connect()
+        self.connection = None
 
     def connect(self):
         self.connection = self.transport(self.host, self.port)
 
-    def reconnect(self):
+    def disconnect(self):
         try:
             self.connection.close()
         except:
             pass
-        self.connect()
+        self.connection = None
 
     def transmit(self, message):
         for i in xrange(2):
+            if not self.connection:
+                self.connect()
             try:
                 raw = self.connection.write(message.raw)
                 return Message(raw=raw)
             except TransportError:
-                self.reconnect()
+                self.disconnect()
         return Message()
 
     def send(self, event):
