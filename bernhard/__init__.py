@@ -72,7 +72,9 @@ class Event(object):
     def __setattr__(self, name, value):
         if name == 'metric':
             name = 'metric_f'
-        if name in set(f.name for f in pb.Event.DESCRIPTOR.fields):
+        if name == 'tags':
+            self.event.tags.extend(value)
+        elif name in set(f.name for f in pb.Event.DESCRIPTOR.fields):
             object.__setattr__(self.event, name, value)
         else:
             object.__setattr__(self, name, value)
