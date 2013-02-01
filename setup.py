@@ -37,5 +37,5 @@ setup(
     zip_safe = False,
     packages = ['bernhard'],
     include_package_data = True,
-    install_requires=['protobuf']
+    install_requires=['protobuf >= 2.4']
 )
