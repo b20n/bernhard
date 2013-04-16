@@ -10,7 +10,7 @@ setup(
     version = '0.0.3',
 
     description = 'Python client for Riemann',
-    long_description = file(
+    long_description = open(
         os.path.join(
             os.path.dirname(__file__),
             'README.md'
@@ -37,5 +37,6 @@ setup(
     zip_safe = False,
     packages = ['bernhard'],
     include_package_data = True,
-    install_requires=['protobuf >= 2.4']
+    install_requires=['protobuf >= 2.4'],
+    use_2to3 = True,
 )
