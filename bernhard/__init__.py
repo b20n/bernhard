@@ -74,7 +74,7 @@ class Event(object):
             name = 'metric_f'
         if name == 'tags':
             self.event.tags.extend(value)
-        if name == 'attributes':
+        elif name == 'attributes':
             if type(value) == dict:
                 for key in iter(value):
                     a = self.event.attributes.add()
