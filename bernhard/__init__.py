@@ -74,6 +74,14 @@ class Event(object):
             name = 'metric_f'
         if name == 'tags':
             self.event.tags.extend(value)
+        if name == 'attributes':
+            if type(value) == dict:
+                for key in iter(value):
+                    a = self.event.attributes.add()
+                    a.key = key
+                    a.value = str(value[key])
+            else:
+                raise TypeError("'attributes' parameter must be type 'dict'")
         elif name in set(f.name for f in pb.Event.DESCRIPTOR.fields):
             object.__setattr__(self.event, name, value)
         else:
