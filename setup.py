@@ -7,7 +7,7 @@ from setuptools import setup
 
 setup(
     name = 'bernhard',
-    version = '0.0.3',
+    version = '0.0.4',
 
     description = 'Python client for Riemann',
     long_description = file(
