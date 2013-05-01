@@ -2,6 +2,7 @@
 
 import socket
 import struct
+import sys
 
 import pb
 
@@ -31,7 +32,9 @@ class TCPTransport(object):
             rxlen = struct.unpack('!I', self.sock.recv(4))[0]
             # Rx response chunks
             response = [self.sock.recv(4096) for _ in xrange(0, rxlen, 4096)]
-            return ''.join(response)
+            if sys.version_info > (3,):
+                response = [e.decode("utf-8") for e in response]
+            return "".join(response)
         except (socket.error, struct.error), e:
             raise TransportError(str(e))
 
