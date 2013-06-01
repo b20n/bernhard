@@ -173,3 +173,17 @@ class Client(object):
         message = Message(query=q)
         response = self.transmit(message)
         return response.events
+
+
+class SSLClient(Client):
+    def __init__(self, host='127.0.0.1', port=5555,
+                 keyfile=None, certfile=None, ca_certs=None):
+        Client.__init__(self, host=host, port=port, transport=SSLTransport)
+
+        self.keyfile = keyfile
+        self.certfile = certfile
+        self.ca_certs = ca_certs
+
+    def connect(self):
+        self.connection = self.transport(self.host, self.port, self.keyfile,
+                                         self.certfile, self.ca_certs)
