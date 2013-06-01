@@ -36,6 +36,19 @@ class TCPTransport(object):
             raise TransportError(str(e))
 
 
+class SSLTransport(TCPTransport):
+    def __init__(self, host, port, keyfile=None, certfile=None, ca_certs=None):
+        import ssl
+        TCPTransport.__init__(self, host, port)
+
+        self.sock = ssl.wrap_socket(self.sock,
+                                    keyfile=keyfile,
+                                    certfile=certfile,
+                                    cert_reqs=ssl.CERT_REQUIRED,
+                                    ssl_version=ssl.PROTOCOL_TLSv1,
+                                    ca_certs=ca_certs)
+
+
 class UDPTransport(object):
     def __init__(self, host, port):
         self.host = host
