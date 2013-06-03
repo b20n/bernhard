@@ -176,7 +176,7 @@ class Client(object):
 
 
 class SSLClient(Client):
-    def __init__(self, host='127.0.0.1', port=5555,
+    def __init__(self, host='127.0.0.1', port=5554,
                  keyfile=None, certfile=None, ca_certs=None):
         Client.__init__(self, host=host, port=port, transport=SSLTransport)
 
