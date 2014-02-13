@@ -23,10 +23,9 @@ class TCPTransport(object):
 
     def write(self, message):
         try:
-            # Tx length header
-            self.sock.send(struct.pack('!I', len(message)))
-            # Tx message
-            self.sock.send(message)
+            # Tx length header and message
+            self.sock.sendall(struct.pack('!I', len(message)) + message)
+
             # Rx length header
             rxlen = struct.unpack('!I', self.sock.recv(4))[0]
             # Rx response chunks
