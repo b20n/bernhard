@@ -29,9 +29,9 @@ class TCPTransport(object):
             self.sock.send(message)
             # Rx length header
             rxlen = struct.unpack('!I', self.sock.recv(4))[0]
-            # Rx response chunks
-            response = [self.sock.recv(4096) for _ in xrange(0, rxlen, 4096)]
-            return ''.join(response)
+            # Rx entire response
+            response = self.sock.recv(rxlen, socket.MSG_WAITALL)
+            return response
         except (socket.error, struct.error), e:
             raise TransportError(str(e))
 
