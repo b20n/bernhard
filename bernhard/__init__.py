@@ -15,8 +15,22 @@ class TransportError(Exception):
 
 class TCPTransport(object):
     def __init__(self, host, port):
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.sock.connect((host, port))
+        for res in socket.getaddrinfo(host, port, socket.AF_UNSPEC, socket.SOCK_STREAM):
+            af, socktype, proto, canonname, sa = res
+            try:
+                self.sock = socket.socket(af, socktype, proto)
+            except socket.error, e:
+                self.sock = None
+                continue
+            try:
+                self.sock.connect(sa)
+            except socket.error, e:
+                self.sock.close()
+                self.sock = None
+                continue
+            break
+        if self.sock is None:
+            raise TransportError("Could not open socket.")
 
     def close(self):
         self.sock.close()
@@ -50,9 +64,20 @@ class SSLTransport(TCPTransport):
 
 class UDPTransport(object):
     def __init__(self, host, port):
-        self.host = host
-        self.port = port
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.host = None
+        self.port = None
+        for res in socket.getaddrinfo(host, port, socket.AF_UNSPEC, socket.SOCK_DGRAM):
+            af, socktype, proto, canonname, sa = res
+            try:
+                self.sock = socket.socket(af, socktype, proto)
+                self.host = sa[0]
+                self.port = sa[1] 
+            except socket.error, e:
+                self.sock = None
+                continue
+            break
+        if self.sock is None:
+            raise TransportError("Could not open socket.")
 
     def close(self):
         self.sock.close()
