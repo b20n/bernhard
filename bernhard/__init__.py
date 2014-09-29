@@ -121,8 +121,11 @@ class Event(object):
                 for key, val in value.items():
                     a = self.event.attributes.add()
                     a.key = key
-                    if not isinstance(val, string_type):
-                        a.value = string_type(val)
+                    if isinstance(val, bytes):
+                        val = val.decode('utf-8')
+                    elif not isinstance(val, string_type):
+                        val = string_type(val)
+                    a.value = string_type(val)
             else:
                 raise TypeError("'attributes' parameter must be type 'dict'")
         elif name in set(f.name for f in pb.Event.DESCRIPTOR.fields):
