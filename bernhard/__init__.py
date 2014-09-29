@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -
 
 import socket
+import ssl
 import struct
+import sys
 
-import pb
+from . import pb
+
+string_type = str
+if sys.version_info[1] < 3:
+    string_type = basestring
 
 class TransportError(Exception):
     def __init__(self, msg):
@@ -19,12 +25,12 @@ class TCPTransport(object):
             af, socktype, proto, canonname, sa = res
             try:
                 self.sock = socket.socket(af, socktype, proto)
-            except socket.error, e:
+            except socket.error as e:
                 self.sock = None
                 continue
             try:
                 self.sock.connect(sa)
-            except socket.error, e:
+            except socket.error as e:
                 self.sock.close()
                 self.sock = None
                 continue
@@ -45,13 +51,12 @@ class TCPTransport(object):
             # Rx entire response
             response = self.sock.recv(rxlen, socket.MSG_WAITALL)
             return response
-        except (socket.error, struct.error), e:
+        except (socket.error, struct.error) as e:
             raise TransportError(str(e))
 
 
 class SSLTransport(TCPTransport):
     def __init__(self, host, port, keyfile=None, certfile=None, ca_certs=None):
-        import ssl
         TCPTransport.__init__(self, host, port)
 
         self.sock = ssl.wrap_socket(self.sock,
@@ -71,8 +76,8 @@ class UDPTransport(object):
             try:
                 self.sock = socket.socket(af, socktype, proto)
                 self.host = sa[0]
-                self.port = sa[1] 
-            except socket.error, e:
+                self.port = sa[1]
+            except socket.error as e:
                 self.sock = None
                 continue
             break
@@ -85,7 +90,7 @@ class UDPTransport(object):
     def write(self, message):
         try:
             self.sock.sendto(message, (self.host, self.port))
-        except socket.error, e:
+        except socket.error as e:
             raise TransportError(str(e))
 
 
@@ -95,7 +100,7 @@ class Event(object):
             self.event = event
         elif params:
             self.event = pb.Event()
-            for key, value in params.iteritems():
+            for key, value in params.items():
                 setattr(self, key, value)
         else:
             self.event = pb.Event()
@@ -113,10 +118,11 @@ class Event(object):
             self.event.tags.extend(value)
         elif name == 'attributes':
             if type(value) == dict:
-                for key in iter(value):
+                for key, val in value.items():
                     a = self.event.attributes.add()
                     a.key = key
-                    a.value = str(value[key])
+                    if not isinstance(val, string_type):
+                        a.value = string_type(val)
             else:
                 raise TypeError("'attributes' parameter must be type 'dict'")
         elif name in set(f.name for f in pb.Event.DESCRIPTOR.fields):
@@ -173,12 +179,12 @@ class Client(object):
     def disconnect(self):
         try:
             self.connection.close()
-        except:
+        except Exception:
             pass
         self.connection = None
 
     def transmit(self, message):
-        for i in xrange(2):
+        for i in range(2):
             if not self.connection:
                 self.connect()
             try:
