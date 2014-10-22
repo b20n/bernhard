@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -
 
 import codecs
+import io
 import os
 
 from setuptools import setup
 
-with open(os.path.join(os.path.dirname(__file__), 'README.md'),
+with io.open(os.path.join(os.path.dirname(__file__), 'README.md'),
           encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
     name = 'bernhard',
-    version = '0.1.1',
+    version = '0.2.0',
     description = 'Python client for Riemann',
     long_description = long_description,
     author = 'Benjamin Anderspn',
