@@ -35,28 +35,28 @@ _STATE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='state', full_name='State.state', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='service', full_name='State.service', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='host', full_name='State.host', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='description', full_name='State.description', index=4,
       number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -112,28 +112,28 @@ _EVENT = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='state', full_name='Event.state', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='service', full_name='Event.service', index=2,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='host', full_name='Event.host', index=3,
       number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='description', full_name='Event.description', index=4,
       number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -203,7 +203,7 @@ _QUERY = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='string', full_name='Query.string', index=0,
       number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -238,7 +238,7 @@ _MSG = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='error', full_name='Msg.error', index=1,
       number=3, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -287,14 +287,14 @@ _ATTRIBUTE = _descriptor.Descriptor(
     _descriptor.FieldDescriptor(
       name='key', full_name='Attribute.key', index=0,
       number=1, type=9, cpp_type=9, label=2,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
       name='value', full_name='Attribute.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
+      has_default_value=False, default_value=u"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -321,32 +321,42 @@ DESCRIPTOR.message_types_by_name['Query'] = _QUERY
 DESCRIPTOR.message_types_by_name['Msg'] = _MSG
 DESCRIPTOR.message_types_by_name['Attribute'] = _ATTRIBUTE
 
-class State(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
+def with_metaclass(meta, *bases):
+    """Create a base class with a metaclass."""
+    # This requires a bit of explanation: the basic idea is to make a dummy
+    # metaclass for one level of class instantiation that replaces itself with
+    # the actual metaclass.
+    class metaclass(meta):
+        def __new__(cls, name, this_bases, d):
+            return meta(name, bases, d)
+    return type.__new__(metaclass, 'temporary_class', (), {})
+
+class State(with_metaclass(_reflection.GeneratedProtocolMessageType,
+                           _message.Message)):
   DESCRIPTOR = _STATE
 
   # @@protoc_insertion_point(class_scope:State)
 
-class Event(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
+class Event(with_metaclass(_reflection.GeneratedProtocolMessageType,
+                           _message.Message)):
   DESCRIPTOR = _EVENT
 
   # @@protoc_insertion_point(class_scope:Event)
 
-class Query(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
+class Query(with_metaclass(_reflection.GeneratedProtocolMessageType,
+                           _message.Message)):
   DESCRIPTOR = _QUERY
 
   # @@protoc_insertion_point(class_scope:Query)
 
-class Msg(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
+class Msg(with_metaclass(_reflection.GeneratedProtocolMessageType,
+                         _message.Message)):
   DESCRIPTOR = _MSG
 
   # @@protoc_insertion_point(class_scope:Msg)
 
-class Attribute(_message.Message):
-  __metaclass__ = _reflection.GeneratedProtocolMessageType
+class Attribute(with_metaclass(_reflection.GeneratedProtocolMessageType,
+                               _message.Message)):
   DESCRIPTOR = _ATTRIBUTE
 
   # @@protoc_insertion_point(class_scope:Attribute)
