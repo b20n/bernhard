@@ -4,6 +4,7 @@ import socket
 import ssl
 import struct
 import sys
+import os
 
 from . import pb
 
@@ -41,6 +42,15 @@ class TCPTransport(object):
     def close(self):
         self.sock.close()
 
+    def read_exactly(self, sock, size):
+        buffer = ''
+        while len(buffer) < size:
+            data = sock.recv(size-len(buffer))
+            if not data:
+                break
+            buffer+=data
+        return buffer
+
     def write(self, message):
         try:
             # Tx length header and message
@@ -49,7 +59,11 @@ class TCPTransport(object):
             # Rx length header
             rxlen = struct.unpack('!I', self.sock.recv(4))[0]
             # Rx entire response
-            response = self.sock.recv(rxlen, socket.MSG_WAITALL)
+            if os.name is 'nt':
+                self.read_exactly(self.sock, rxlen)
+            else:
+                response = self.sock.recv(rxlen, socket.MSG_WAITALL)
+
             return response
         except (socket.error, struct.error) as e:
             raise TransportError(str(e))
