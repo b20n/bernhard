@@ -2,11 +2,13 @@
 
 A simple Python client for [Riemann](http://github.com/aphyr/riemann). Usage:
 
-    import bernhard
+~~~python
+import bernhard
     
-    c = bernhard.Client()
-    c.send({'host': 'myhost.foobar.com', 'service': 'myservice', 'metric': 12})
-    q = c.query('true')
+c = bernhard.Client()
+c.send({'host': 'myhost.foobar.com', 'service': 'myservice', 'metric': 12})
+q = c.query('true')
+~~~
     
 ## Installing
 
