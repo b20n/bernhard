@@ -60,7 +60,7 @@ class TCPTransport(object):
             rxlen = struct.unpack('!I', self.sock.recv(4))[0]
             # Rx entire response
             if os.name is 'nt':
-                self.read_exactly(self.sock, rxlen)
+                response = self.read_exactly(self.sock, rxlen)
             else:
                 response = self.sock.recv(rxlen, socket.MSG_WAITALL)
 
