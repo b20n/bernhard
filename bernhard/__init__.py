@@ -30,6 +30,7 @@ class TCPTransport(object):
             try:
                 log.debug("Creating socket with %s %s %s", af, socktype, proto)
                 self.sock = socket.socket(af, socktype, proto)
+                self.sock.settimeout(15.0)
             except socket.error as e:
                 log.exception("Exception creating TCP socket: %s", e)
                 self.sock = None
