@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -
 
+import logging
+log = logging.getLogger(__name__)
+
 import socket
 import ssl
 import struct
@@ -25,19 +28,22 @@ class TCPTransport(object):
         for res in socket.getaddrinfo(host, port, socket.AF_UNSPEC, socket.SOCK_STREAM):
             af, socktype, proto, canonname, sa = res
             try:
+                log.debug("Creating socket with %s %s %s", af, socktype, proto)
                 self.sock = socket.socket(af, socktype, proto)
             except socket.error as e:
+                log.exception("Exception creating TCP socket: %s", e)
                 self.sock = None
                 continue
             try:
                 self.sock.connect(sa)
             except socket.error as e:
+                log.exception("Exception connecting to TCP socket: %s", e)
                 self.sock.close()
                 self.sock = None
                 continue
             break
         if self.sock is None:
-            raise TransportError("Could not open socket.")
+            raise TransportError("Could not open TCP socket.")
 
     def close(self):
         self.sock.close()
@@ -45,32 +51,39 @@ class TCPTransport(object):
     def read_exactly(self, sock, size):
         buffer = ''
         while len(buffer) < size:
-            data = sock.recv(size-len(buffer))
+            data = sock.recv(size - len(buffer))
             if not data:
+                log.debug("Expected to read %s bytes, but read %s bytes", size, len(buffer))
                 break
-            buffer+=data
+            buffer += data
         return buffer
 
     def write(self, message):
         try:
             # Tx length header and message
+            log.debug("Sending event to Riemann")
             self.sock.sendall(struct.pack('!I', len(message)) + message)
 
             # Rx length header
-            rxlen = struct.unpack('!I', self.sock.recv(4))[0]
+            log.debug("Reading Riemann Response Length Header")
+            response = self.read_exactly(self.sock, 4)
+            rxlen = struct.unpack('!I', response)[0]
+            log.debug("Header Length Is: %d", rxlen)
+
             # Rx entire response
-            if os.name is 'nt':
-                response = self.read_exactly(self.sock, rxlen)
-            else:
-                response = self.sock.recv(rxlen, socket.MSG_WAITALL)
+            log.debug("Reading Riemann Response")
+            response = self.read_exactly(self.sock, rxlen)
 
             return response
         except (socket.error, struct.error) as e:
+            log.exception("Exception sending event to Riemann over TCP socket: %s", e)
             raise TransportError(str(e))
 
 
 class SSLTransport(TCPTransport):
     def __init__(self, host, port, keyfile=None, certfile=None, ca_certs=None):
+        log.debug("Using SSL Transport")
+
         TCPTransport.__init__(self, host, port)
 
         self.sock = ssl.wrap_socket(self.sock,
@@ -83,6 +96,8 @@ class SSLTransport(TCPTransport):
 
 class UDPTransport(object):
     def __init__(self, host, port):
+        log.debug("Using UDP Transport")
+
         self.host = None
         self.port = None
         for res in socket.getaddrinfo(host, port, socket.AF_UNSPEC, socket.SOCK_DGRAM):
@@ -92,6 +107,7 @@ class UDPTransport(object):
                 self.host = sa[0]
                 self.port = sa[1]
             except socket.error as e:
+                log.exception("Exception opening socket: %s", e)
                 self.sock = None
                 continue
             break
@@ -105,6 +121,7 @@ class UDPTransport(object):
         try:
             self.sock.sendto(message, (self.host, self.port))
         except socket.error as e:
+            log.exception("Exception writing to socket: %s", e)
             raise TransportError(str(e))
 
 
@@ -146,6 +163,9 @@ class Event(object):
             object.__setattr__(self.event, name, value)
         else:
             object.__setattr__(self, name, value)
+
+    def __str__(self):
+        return str(self.event)
 
 
 class Message(object):
@@ -196,7 +216,8 @@ class Client(object):
     def disconnect(self):
         try:
             self.connection.close()
-        except Exception:
+        except Exception as e:
+            log.exception("Exception disconnecting client: %s", e)
             pass
         self.connection = None
 
