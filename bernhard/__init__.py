@@ -233,8 +233,10 @@ class Client(object):
                 self.disconnect()
         return Message()
 
-    def send(self, event):
-        message = Message(events=[Event(params=event)])
+    def send(self, events):
+        if not type(events) == list:
+            events = [events]
+        message = Message(events=[Event(params=event) for event in events])
         response = self.transmit(message)
         return response.ok
 
