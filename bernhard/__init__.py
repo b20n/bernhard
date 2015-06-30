@@ -7,7 +7,6 @@ import socket
 import ssl
 import struct
 import sys
-import os
 
 from . import pb
 
@@ -233,8 +232,8 @@ class Client(object):
                 self.disconnect()
         return Message()
 
-    def send(self, event):
-        message = Message(events=[Event(params=event)])
+    def send(self, *events):
+        message = Message(events=[Event(params=event) for event in events])
         response = self.transmit(message)
         return response.ok
 
