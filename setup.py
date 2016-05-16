@@ -38,5 +38,8 @@ setup(
     zip_safe = False,
     packages = ['bernhard'],
     include_package_data = True,
-    install_requires=['protobuf >= 2.4']
+    install_requires=['protobuf >= 2.4'],
+    extras_require={
+        'tornado': ['tornado>=4.0,<5']
+    }
 )
