@@ -51,6 +51,8 @@ class AsyncTCPClient(object):
 
     @gen.coroutine
     def transmit(self, message):
+        if self.connection is None:
+            raise IOError('Not connected')
         try:
             raw = message.raw
             frame = struct.pack('!I', len(raw)) + raw
