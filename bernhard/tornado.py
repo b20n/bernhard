@@ -6,7 +6,7 @@ from collections import deque
 
 from . import log, Message, Event
 
-from tornado import gen, iostream, ioloop, concurrent
+from tornado import gen, iostream, ioloop, concurrent, locks
 
 
 class AsyncTCPClient(object):
@@ -16,14 +16,20 @@ class AsyncTCPClient(object):
         self.loop = loop or ioloop.IOLoop.current()
         self.futures = deque()
         self.connection = None
+        self.connect_lock = locks.Lock()
 
     @gen.coroutine
     def connect(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)
-        self.connection = iostream.IOStream(s)
-        yield self.connection.connect((self.host, self.port))
-        self.loop.spawn_callback(self.read_loop)
-        raise gen.Return(self)
+        with (yield self.connect_lock.acquire()):
+            if self.connection is not None:
+                raise gen.Return(self)
+
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM, 0)
+            connection = iostream.IOStream(s)
+            yield connection.connect((self.host, self.port))
+            self.connection = connection
+            self.loop.spawn_callback(self.read_loop)
+            raise gen.Return(self)
 
     @gen.coroutine
     def read_loop(self):
