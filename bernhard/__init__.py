@@ -89,7 +89,7 @@ class SSLTransport(TCPTransport):
         self.sock = ssl.wrap_socket(self.sock,
                                     keyfile=keyfile,
                                     certfile=certfile,
-                                    cert_reqs=ssl.CERT_REQUIRED,
+                                    #cert_reqs=ssl.CERT_REQUIRED,
                                     ssl_version=ssl.PROTOCOL_TLSv1,
                                     ca_certs=ca_certs)
 
