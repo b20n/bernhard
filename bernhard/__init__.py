@@ -11,7 +11,7 @@ import sys
 from . import pb
 
 string_type = str
-if sys.version_info[1] < 3:
+if sys.version_info.major < 3:
     string_type = basestring
 
 class TransportError(Exception):
