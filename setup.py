@@ -12,7 +12,7 @@ with io.open(os.path.join(os.path.dirname(__file__), 'README.md'),
 
 setup(
     name = 'bernhard',
-    version = '0.2.5',
+    version = '0.2.6',
     description = 'Python client for Riemann',
     long_description = long_description,
     author = 'Benjamin Anderspn',
