@@ -3,12 +3,22 @@
 import logging
 log = logging.getLogger(__name__)
 
+import pkg_resources
 import socket
 import ssl
 import struct
 import sys
 
-from . import pb
+try:
+    PROTOBUF_VERSION = pkg_resources.get_distribution('protobuf').version
+except pkg_resources.DistributionNotFound:
+    PROTOBUF_VERSION = 'unknown'
+
+if PROTOBUF_VERSION.startswith('3'):
+    from . import proto_pb2 as pb
+else:
+    from . import pb
+
 
 string_type = str
 if sys.version_info[1] < 3:
@@ -160,7 +170,7 @@ class Event(object):
             else:
                 raise TypeError("'attributes' parameter must be type 'dict'")
         elif name in set(f.name for f in pb.Event.DESCRIPTOR.fields):
-            object.__setattr__(self.event, name, value)
+            setattr(self.event, name, value)
         else:
             object.__setattr__(self, name, value)
 
@@ -189,7 +199,7 @@ class Message(object):
 
     def __setattr__(self, name, value):
         if name in set(f.name for f in pb.Msg.DESCRIPTOR.fields):
-            object.__setattr__(self.message, name, value)
+            setattr(self.message, name, value)
         else:
             object.__setattr__(self, name, value)
 
