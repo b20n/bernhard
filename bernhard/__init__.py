@@ -59,7 +59,7 @@ class TCPTransport(object):
         self.sock.close()
 
     def read_exactly(self, sock, size):
-        buffer = ''
+        buffer = bytes()  # empty bytes sequence for Python 2.6+
         while len(buffer) < size:
             data = sock.recv(size - len(buffer))
             if not data:
