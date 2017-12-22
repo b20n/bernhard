@@ -21,7 +21,7 @@ else:
 
 
 string_type = str
-if sys.version_info[1] < 3:
+if sys.version_info.major < 3:
     string_type = basestring
 
 class TransportError(Exception):
@@ -165,8 +165,8 @@ class Event(object):
                     if isinstance(val, bytes):
                         val = val.decode('utf-8')
                     elif not isinstance(val, string_type):
-                        val = string_type(val)
-                    a.value = string_type(val)
+                        val = str(val)
+                    a.value = val
             else:
                 raise TypeError("'attributes' parameter must be type 'dict'")
         elif name in set(f.name for f in pb.Event.DESCRIPTOR.fields):
