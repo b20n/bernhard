@@ -148,13 +148,13 @@ class Event(object):
 
     def __getattr__(self, name):
         if name == 'metric':
-            name = 'metric_f'
+            name = 'metric_d'
         if name in set(f.name for f in pb.Event.DESCRIPTOR.fields):
             return getattr(self.event, name)
 
     def __setattr__(self, name, value):
         if name == 'metric':
-            name = 'metric_f'
+            name = 'metric_d'
         if name == 'tags':
             self.event.tags.extend(value)
         elif name == 'attributes':
