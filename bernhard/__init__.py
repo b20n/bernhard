@@ -99,7 +99,7 @@ class SSLTransport(TCPTransport):
         self.sock = ssl.wrap_socket(self.sock,
                                     keyfile=keyfile,
                                     certfile=certfile,
-                                    cert_reqs=ssl.CERT_REQUIRED,
+                                    #cert_reqs=ssl.CERT_REQUIRED,
                                     ssl_version=ssl.PROTOCOL_TLSv1,
                                     ca_certs=ca_certs)
 
@@ -214,14 +214,23 @@ class Message(object):
 
 
 class Client(object):
-    def __init__(self, host='127.0.0.1', port=5555, transport=TCPTransport):
+    def __init__(self, host='127.0.0.1', port=5555, transport=TCPTransport, tls=False, keyfile=None, certfile=None, ca_certs=None):
         self.host = host
         self.port = port
         self.transport = transport
         self.connection = None
+        self.tls = tls
+        if tls:
+            self.keyfile = keyfile
+            self.certfile = certfile
+            self.ca_certs = ca_certs
 
     def connect(self):
-        self.connection = self.transport(self.host, self.port)
+        if self.tls:
+            self.connection = self.transport(self.host, self.port, self.keyfile,
+                                             self.certfile, self.ca_certs)
+        else:
+            self.connection = self.transport(self.host, self.port)
 
     def disconnect(self):
         try:
