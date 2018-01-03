@@ -45,6 +45,10 @@ class TCPTransport(object):
                 self.sock = None
                 continue
             try:
+                self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            except (socket.error, AttributeError) as e:
+                log.exception("Could not set REUSEADDR on tcp client socket: %s", e)
+            try:
                 self.sock.connect(sa)
             except socket.error as e:
                 log.exception("Exception connecting to TCP socket: %s", e)
