@@ -17,73 +17,72 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='proto.proto',
-  package='',
+  package='bernhard',
   syntax='proto2',
-  serialized_pb=_b('\n\x0bproto.proto\"\x81\x01\n\x05State\x12\x0c\n\x04time\x18\x01 \x01(\x03\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0f\n\x07service\x18\x03 \x01(\t\x12\x0c\n\x04host\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12\x0c\n\x04once\x18\x06 \x01(\x08\x12\x0c\n\x04tags\x18\x07 \x03(\t\x12\x0b\n\x03ttl\x18\x08 \x01(\x02\"\xce\x01\n\x05\x45vent\x12\x0c\n\x04time\x18\x01 \x01(\x03\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0f\n\x07service\x18\x03 \x01(\t\x12\x0c\n\x04host\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12\x0c\n\x04tags\x18\x07 \x03(\t\x12\x0b\n\x03ttl\x18\x08 \x01(\x02\x12\x1e\n\nattributes\x18\t \x03(\x0b\x32\n.Attribute\x12\x15\n\rmetric_sint64\x18\r \x01(\x12\x12\x10\n\x08metric_d\x18\x0e \x01(\x01\x12\x10\n\x08metric_f\x18\x0f \x01(\x02\"\x17\n\x05Query\x12\x0e\n\x06string\x18\x01 \x01(\t\"g\n\x03Msg\x12\n\n\x02ok\x18\x02 \x01(\x08\x12\r\n\x05\x65rror\x18\x03 \x01(\t\x12\x16\n\x06states\x18\x04 \x03(\x0b\x32\x06.State\x12\x15\n\x05query\x18\x05 \x01(\x0b\x32\x06.Query\x12\x16\n\x06\x65vents\x18\x06 \x03(\x0b\x32\x06.Event\"\'\n\tAttribute\x12\x0b\n\x03key\x18\x01 \x02(\t\x12\r\n\x05value\x18\x02 \x01(\tB\x1a\n\x11\x63om.aphyr.riemannB\x05Proto')
+  serialized_pb=_b('\n\x0bproto.proto\x12\x08\x62\x65rnhard\"\x81\x01\n\x05State\x12\x0c\n\x04time\x18\x01 \x01(\x03\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0f\n\x07service\x18\x03 \x01(\t\x12\x0c\n\x04host\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12\x0c\n\x04once\x18\x06 \x01(\x08\x12\x0c\n\x04tags\x18\x07 \x03(\t\x12\x0b\n\x03ttl\x18\x08 \x01(\x02\"\xd7\x01\n\x05\x45vent\x12\x0c\n\x04time\x18\x01 \x01(\x03\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0f\n\x07service\x18\x03 \x01(\t\x12\x0c\n\x04host\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12\x0c\n\x04tags\x18\x07 \x03(\t\x12\x0b\n\x03ttl\x18\x08 \x01(\x02\x12\'\n\nattributes\x18\t \x03(\x0b\x32\x13.bernhard.Attribute\x12\x15\n\rmetric_sint64\x18\r \x01(\x12\x12\x10\n\x08metric_d\x18\x0e \x01(\x01\x12\x10\n\x08metric_f\x18\x0f \x01(\x02\"\x17\n\x05Query\x12\x0e\n\x06string\x18\x01 \x01(\t\"\x82\x01\n\x03Msg\x12\n\n\x02ok\x18\x02 \x01(\x08\x12\r\n\x05\x65rror\x18\x03 \x01(\t\x12\x1f\n\x06states\x18\x04 \x03(\x0b\x32\x0f.bernhard.State\x12\x1e\n\x05query\x18\x05 \x01(\x0b\x32\x0f.bernhard.Query\x12\x1f\n\x06\x65vents\x18\x06 \x03(\x0b\x32\x0f.bernhard.Event\"\'\n\tAttribute\x12\x0b\n\x03key\x18\x01 \x02(\t\x12\r\n\x05value\x18\x02 \x01(\tB\x1a\n\x11\x63om.aphyr.riemannB\x05Proto')
 )
-_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
 
 _STATE = _descriptor.Descriptor(
   name='State',
-  full_name='State',
+  full_name='bernhard.State',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='time', full_name='State.time', index=0,
+      name='time', full_name='bernhard.State.time', index=0,
       number=1, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='state', full_name='State.state', index=1,
+      name='state', full_name='bernhard.State.state', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='service', full_name='State.service', index=2,
+      name='service', full_name='bernhard.State.service', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='host', full_name='State.host', index=3,
+      name='host', full_name='bernhard.State.host', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='description', full_name='State.description', index=4,
+      name='description', full_name='bernhard.State.description', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='once', full_name='State.once', index=5,
+      name='once', full_name='bernhard.State.once', index=5,
       number=6, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='tags', full_name='State.tags', index=6,
+      name='tags', full_name='bernhard.State.tags', index=6,
       number=7, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ttl', full_name='State.ttl', index=7,
+      name='ttl', full_name='bernhard.State.ttl', index=7,
       number=8, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -101,90 +100,90 @@ _STATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16,
-  serialized_end=145,
+  serialized_start=26,
+  serialized_end=155,
 )
 
 
 _EVENT = _descriptor.Descriptor(
   name='Event',
-  full_name='Event',
+  full_name='bernhard.Event',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='time', full_name='Event.time', index=0,
+      name='time', full_name='bernhard.Event.time', index=0,
       number=1, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='state', full_name='Event.state', index=1,
+      name='state', full_name='bernhard.Event.state', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='service', full_name='Event.service', index=2,
+      name='service', full_name='bernhard.Event.service', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='host', full_name='Event.host', index=3,
+      name='host', full_name='bernhard.Event.host', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='description', full_name='Event.description', index=4,
+      name='description', full_name='bernhard.Event.description', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='tags', full_name='Event.tags', index=5,
+      name='tags', full_name='bernhard.Event.tags', index=5,
       number=7, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='ttl', full_name='Event.ttl', index=6,
+      name='ttl', full_name='bernhard.Event.ttl', index=6,
       number=8, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='attributes', full_name='Event.attributes', index=7,
+      name='attributes', full_name='bernhard.Event.attributes', index=7,
       number=9, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='metric_sint64', full_name='Event.metric_sint64', index=8,
+      name='metric_sint64', full_name='bernhard.Event.metric_sint64', index=8,
       number=13, type=18, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='metric_d', full_name='Event.metric_d', index=9,
+      name='metric_d', full_name='bernhard.Event.metric_d', index=9,
       number=14, type=1, cpp_type=5, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='metric_f', full_name='Event.metric_f', index=10,
+      name='metric_f', full_name='bernhard.Event.metric_f', index=10,
       number=15, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
@@ -202,20 +201,20 @@ _EVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=148,
-  serialized_end=354,
+  serialized_start=158,
+  serialized_end=373,
 )
 
 
 _QUERY = _descriptor.Descriptor(
   name='Query',
-  full_name='Query',
+  full_name='bernhard.Query',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='string', full_name='Query.string', index=0,
+      name='string', full_name='bernhard.Query.string', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -233,48 +232,48 @@ _QUERY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=356,
-  serialized_end=379,
+  serialized_start=375,
+  serialized_end=398,
 )
 
 
 _MSG = _descriptor.Descriptor(
   name='Msg',
-  full_name='Msg',
+  full_name='bernhard.Msg',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='ok', full_name='Msg.ok', index=0,
+      name='ok', full_name='bernhard.Msg.ok', index=0,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='error', full_name='Msg.error', index=1,
+      name='error', full_name='bernhard.Msg.error', index=1,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='states', full_name='Msg.states', index=2,
+      name='states', full_name='bernhard.Msg.states', index=2,
       number=4, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='query', full_name='Msg.query', index=3,
+      name='query', full_name='bernhard.Msg.query', index=3,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='events', full_name='Msg.events', index=4,
+      name='events', full_name='bernhard.Msg.events', index=4,
       number=6, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -292,27 +291,27 @@ _MSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=381,
-  serialized_end=484,
+  serialized_start=401,
+  serialized_end=531,
 )
 
 
 _ATTRIBUTE = _descriptor.Descriptor(
   name='Attribute',
-  full_name='Attribute',
+  full_name='bernhard.Attribute',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='Attribute.key', index=0,
+      name='key', full_name='bernhard.Attribute.key', index=0,
       number=1, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='value', full_name='Attribute.value', index=1,
+      name='value', full_name='bernhard.Attribute.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -330,8 +329,8 @@ _ATTRIBUTE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=486,
-  serialized_end=525,
+  serialized_start=533,
+  serialized_end=572,
 )
 
 _EVENT.fields_by_name['attributes'].message_type = _ATTRIBUTE
@@ -343,53 +342,44 @@ DESCRIPTOR.message_types_by_name['Event'] = _EVENT
 DESCRIPTOR.message_types_by_name['Query'] = _QUERY
 DESCRIPTOR.message_types_by_name['Msg'] = _MSG
 DESCRIPTOR.message_types_by_name['Attribute'] = _ATTRIBUTE
+_sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 State = _reflection.GeneratedProtocolMessageType('State', (_message.Message,), dict(
   DESCRIPTOR = _STATE,
   __module__ = 'proto_pb2'
-  # @@protoc_insertion_point(class_scope:State)
+  # @@protoc_insertion_point(class_scope:bernhard.State)
   ))
 _sym_db.RegisterMessage(State)
 
 Event = _reflection.GeneratedProtocolMessageType('Event', (_message.Message,), dict(
   DESCRIPTOR = _EVENT,
   __module__ = 'proto_pb2'
-  # @@protoc_insertion_point(class_scope:Event)
+  # @@protoc_insertion_point(class_scope:bernhard.Event)
   ))
 _sym_db.RegisterMessage(Event)
 
 Query = _reflection.GeneratedProtocolMessageType('Query', (_message.Message,), dict(
   DESCRIPTOR = _QUERY,
   __module__ = 'proto_pb2'
-  # @@protoc_insertion_point(class_scope:Query)
+  # @@protoc_insertion_point(class_scope:bernhard.Query)
   ))
 _sym_db.RegisterMessage(Query)
 
 Msg = _reflection.GeneratedProtocolMessageType('Msg', (_message.Message,), dict(
   DESCRIPTOR = _MSG,
   __module__ = 'proto_pb2'
-  # @@protoc_insertion_point(class_scope:Msg)
+  # @@protoc_insertion_point(class_scope:bernhard.Msg)
   ))
 _sym_db.RegisterMessage(Msg)
 
 Attribute = _reflection.GeneratedProtocolMessageType('Attribute', (_message.Message,), dict(
   DESCRIPTOR = _ATTRIBUTE,
   __module__ = 'proto_pb2'
-  # @@protoc_insertion_point(class_scope:Attribute)
+  # @@protoc_insertion_point(class_scope:bernhard.Attribute)
   ))
 _sym_db.RegisterMessage(Attribute)
 
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('\n\021com.aphyr.riemannB\005Proto'))
-try:
-  # THESE ELEMENTS WILL BE DEPRECATED.
-  # Please use the generated *_pb2_grpc.py files instead.
-  import grpc
-  from grpc.framework.common import cardinality
-  from grpc.framework.interfaces.face import utilities as face_utilities
-  from grpc.beta import implementations as beta_implementations
-  from grpc.beta import interfaces as beta_interfaces
-except ImportError:
-  pass
 # @@protoc_insertion_point(module_scope)
