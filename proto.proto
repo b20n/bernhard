@@ -1,3 +1,4 @@
+package bernhard;
 option java_package = "com.aphyr.riemann";
 option java_outer_classname = "Proto";
 
