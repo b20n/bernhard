@@ -18,7 +18,7 @@ setup(
     author = 'Benjamin Anderspn',
     author_email = 'b@banjiewen.net',
     license = 'ASF2.0',
-    url = 'http://github.com/banjiewen/bernhard.git',
+    url = 'https://github.com/b20n/bernhard',
 
     classifiers = [
         'Development Status :: 4 - Beta',
